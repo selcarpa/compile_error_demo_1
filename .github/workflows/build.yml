@@ -21,6 +21,11 @@ jobs:
         with:
           java-version: '17'
 
+      - name: fix runable
+        shell: bash 
+        run: |
+          chmod u+x gradlew
+
       - name: Build jar with Gradle
         shell: bash
         run: |
