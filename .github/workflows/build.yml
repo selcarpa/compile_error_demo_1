@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        name: checkout
+
+      - name: Set up graalvm JDK 17
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '17'
+
+      - name: Build jar with Gradle
+        shell: bash
+        run: |
+          ./gradlew jvm
+
+      - name: Build native package with Gradle
+        shell: bash
+        run: |
+          ./gradlew linuxX64MainBinaries
+
+      - name: Print files
+        run: |
+          tree -hs
