@@ -29,7 +29,7 @@ jobs:
       - name: Build jar with Gradle
         shell: bash
         run: |
-          ./gradlew jvm
+          ./gradlew jvmJar
 
       - name: Build native package with Gradle
         shell: bash
